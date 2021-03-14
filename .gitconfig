@@ -1,5 +1,6 @@
 [user]
+	name = Oliver Thoma
 	email = oliver@mts.ch
-	name = odthoma			
+	username = odthoma			
 [core]
-	editor = nano
+	editor = vim

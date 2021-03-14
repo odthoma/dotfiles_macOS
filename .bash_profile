@@ -1,22 +1,33 @@
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source ~/.profile
 
 HOST_NAME=Olivers-MBP
 
-source ~/.nvm/nvm.sh
-nvm use stable
-shopt -s autocd
-shopt -s histappend
+# -------------------------------------
+# environment
+# -------------------------------------
+export PATH=$PATH:$HOME/bin:/opt/apache-maven-3.6.3/bin
 
-export PATH=$PATH:$HOME/bin
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export HISTSIZE=5000
 export HISTFILESIZE=10000
 
+shopt -s autocd
+shopt -s histappend
+
+# -------------------------------------
+# bash history search with arrow keys
+# -------------------------------------
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+# ------------------------------
+# prompt styling
+# ------------------------------
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
@@ -26,7 +37,7 @@ bldgrn='\e[1;32m' # Bold Green
 bldpur='\e[1;35m' # Bold Purple
 txtrst='\e[0m'    # Text Reset
 
-emojis=("👾" "🌐" "🎲" "🌍" "🐉" "🌵" "🍺")
+emojis=("👾" "🌱" "🥑" "🌍" "🐉" "🌵" "🍺")
 
 EMOJI=${emojis[$RANDOM % ${#emojis[@]} ]}
 
@@ -39,27 +50,38 @@ print_before_the_prompt () {
 
 PROMPT_COMMAND=print_before_the_prompt
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-PS1="$EMOJI >"
+PS1="$EMOJI > "
 
-fortune | cowsay -f tux
-
+# ------------------------------
+# general aliases and functions
+# ------------------------------
 function mkcd() {
 	mkdir $1 && cd $1
 }
 
-# -------
-# Aliases
-# -------
 alias c='code .'
-alias ns='npm start'
-alias nr='npm run'
-alias nis='npm i -S'
-alias l="ls" # List files in current directory
-alias ll="ls -al" # List all files in current directory in long list format
-alias o="open ." # Open the current directory in Finder
+alias o="open ."
+alias l="ls"
+alias ll="ls -al"
 
 # ----------------------
-# Git Aliases
+# yarn aliases
+# ----------------------
+alias y='yarn'
+alias ys='yarn start'
+alias ya='yarn add'
+alias yr='yarn run'
+
+# ----------------------
+# npm aliases
+# ----------------------
+alias ns='npm start'
+alias nr='npm run'
+alias ni='npm i'
+alias nis='npm i -S'
+
+# ----------------------
+# git aliases
 # ----------------------
 alias ga='git add'
 alias gaa='git add .'
